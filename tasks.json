@@ -2,10 +2,17 @@
     "tasks": [
         {
             "id": 1,
-            "description": "First task",
-            "status": "in-progress",
-            "createdAt": "2025-01-12T16:22:57.010852",
-            "updatedAt": "2025-01-13T20:56:31.705030"
+            "description": "first taks",
+            "status": "todo",
+            "createdAt": "2025-01-15T16:49:36.609137",
+            "updatedAt": "2025-01-15T16:49:36.609137"
+        },
+        {
+            "id": 2,
+            "description": "second taks",
+            "status": "todo",
+            "createdAt": "2025-01-15T16:49:47.170797",
+            "updatedAt": "2025-01-15T16:49:47.170797"
         }
     ]
 }

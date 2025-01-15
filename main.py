@@ -11,7 +11,7 @@ def current_time():
 if not os.path.exists('tasks.json'):
     with open('tasks.json', 'w') as file:
         json.dump({'tasks': []}, file)  # создаем базовую структуру
-        print('tasks.json создан с базовый структурой.')
+    print('tasks.json создан с базовый структурой.')
 
 
 def load_tasks():
