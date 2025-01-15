@@ -18,8 +18,14 @@ def load_tasks():
     try:
         with open('tasks.json', 'r') as file:
             return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
+    except FileNotFoundError:
+        print("Файл task.json не найден, создаем новый...")
         return {'tasks': []}
+    except json.JSONDecodeError:
+        print("Ошибка чтения tasks.json. Сбрасываем файл...")
+        save_tasks({'tasks': []})
+        return {'tasks': []}
+
 
 
 def save_tasks(data):
