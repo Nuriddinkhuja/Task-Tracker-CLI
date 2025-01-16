@@ -13,6 +13,13 @@
             "status": "todo",
             "createdAt": "2025-01-15T16:49:47.170797",
             "updatedAt": "2025-01-15T16:49:47.170797"
+        },
+        {
+            "id": 3,
+            "description": "third task",
+            "status": "done",
+            "createdAt": "2025-01-16T10:02:18.444005",
+            "updatedAt": "2025-01-16T10:02:41.466220"
         }
     ]
 }

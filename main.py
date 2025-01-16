@@ -131,10 +131,9 @@ if __name__ == "__main__":
             print("Нет задач для отображения")
 
         else:
+            print(f"{'ID':<5} {'Описание':<30} {'Статус':<12} {'Создано':<20} {'Обновлено':<20}")
+            print("-" * 90)
             for task in filtered_tasks:
-                print(f"ID: {task['id']}")
-                print(f"Описание: {task['description']}")
-                print(f"Статус: {task['status']}")
-                print(f"Создано: {task['createdAt']}")
-                print(f"Обновлено: {task['updatedAt']}")
-                print("-" * 40)
+                print(
+                    f"{task['id']:<5} {task['description']:<30} "
+                    f"{task['status']:<12} {task['createdAt']:<20} {task['updatedAt']:<20}")
