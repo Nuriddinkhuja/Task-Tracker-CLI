@@ -27,7 +27,6 @@ def load_tasks():
         return {'tasks': []}
 
 
-
 def save_tasks(data):
     with open('tasks.json', 'w') as file:
         json.dump(data, file, indent=4)
@@ -56,6 +55,14 @@ list_parser = subparsers.add_parser('list', help='Вывести список з
 list_parser.add_argument('status', nargs='?', type=str, choices=["todo", "in-progress", "done"],
                          help="Фильтр по статусу (необязательно)")
 
+
+def get_task_by_id(tasks, task_id):
+    for task in tasks:
+        if task['id'] == task_id:
+            return task
+    return None
+
+
 if __name__ == "__main__":
     try:
         args = parser.parse_args()  # Получаем аргументы командной строки
@@ -78,13 +85,12 @@ if __name__ == "__main__":
         print(f"Задача успешно добавлена (ID: {new_id})")
 
     elif args.command == 'update':
-        for task in tasks_data['tasks']:
-            if task['id'] == args.id:
-                task['description'] = args.description
-                task['updatedAt'] = current_time()
-                save_tasks(tasks_data)
-                print(f"Задача с ID {args.id} успешно обновлена")
-                break
+        task = get_task_by_id(tasks_data['tasks'], args.id)
+        if task['id'] == args.id:
+            task['description'] = args.description
+            task['updatedAt'] = current_time()
+            save_tasks(tasks_data)
+            print(f"Задача с ID {args.id} успешно обновлена")
         else:
             print(f"Задача с ID {args.id} не найдена")
 
@@ -95,25 +101,23 @@ if __name__ == "__main__":
 
     elif args.command == "mark-in-progress":
         # Отметить задачу как в процессе выполнения
-        for task in tasks_data["tasks"]:
-            if task["id"] == args.id:
-                task["status"] = "in-progress"
-                task["updatedAt"] = current_time()
-                save_tasks(tasks_data)
-                print(f"Задача с ID {args.id} успешно отмечена как 'в процессе выполнения'")
-                break
+        task = get_task_by_id(tasks_data['tasks'], args.id)
+        if task["id"] == args.id:
+            task["status"] = "in-progress"
+            task["updatedAt"] = current_time()
+            save_tasks(tasks_data)
+            print(f"Задача с ID {args.id} успешно отмечена как 'в процессе выполнения'")
         else:
             print(f"Задача с ID {args.id} не найдена")
 
     elif args.command == 'mark-done':
         # Отметить задачу как выполнен
-        for task in tasks_data['tasks']:
-            if task['id'] == args.id:
-                task['status'] = 'done'
-                task["updatedAt"] = current_time()
-                save_tasks(tasks_data)
-                print(f"Задача с ID {args.id} успешно отмечена как 'выполненная'")
-                break
+        task = get_task_by_id(tasks_data['tasks'], args.id)
+        if task['id'] == args.id:
+            task['status'] = 'done'
+            task["updatedAt"] = current_time()
+            save_tasks(tasks_data)
+            print(f"Задача с ID {args.id} успешно отмечена как 'выполненная'")
         else:
             print(f"Задача с ID {args.id} не найдена")
 
@@ -134,4 +138,3 @@ if __name__ == "__main__":
                 print(f"Создано: {task['createdAt']}")
                 print(f"Обновлено: {task['updatedAt']}")
                 print("-" * 40)
-
