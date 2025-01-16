@@ -63,6 +63,15 @@ def get_task_by_id(tasks, task_id):
     return None
 
 
+def update_status(tasks, task_id, new_status):
+    task = get_task_by_id(tasks, task_id)
+    if task:
+        task['status'] = new_status
+        task['updatedAt'] = current_time()
+        return True
+    return False
+
+
 if __name__ == "__main__":
     try:
         args = parser.parse_args()  # Получаем аргументы командной строки
@@ -101,10 +110,7 @@ if __name__ == "__main__":
 
     elif args.command == "mark-in-progress":
         # Отметить задачу как в процессе выполнения
-        task = get_task_by_id(tasks_data['tasks'], args.id)
-        if task["id"] == args.id:
-            task["status"] = "in-progress"
-            task["updatedAt"] = current_time()
+        if update_status(tasks_data['tasks'], args.id, "in-progress"):
             save_tasks(tasks_data)
             print(f"Задача с ID {args.id} успешно отмечена как 'в процессе выполнения'")
         else:
@@ -112,10 +118,7 @@ if __name__ == "__main__":
 
     elif args.command == 'mark-done':
         # Отметить задачу как выполнен
-        task = get_task_by_id(tasks_data['tasks'], args.id)
-        if task['id'] == args.id:
-            task['status'] = 'done'
-            task["updatedAt"] = current_time()
+        if update_status(tasks_data['tasks'], args.id, "done"):
             save_tasks(tasks_data)
             print(f"Задача с ID {args.id} успешно отмечена как 'выполненная'")
         else:
