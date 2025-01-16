@@ -129,4 +129,4 @@ ID: 1      Описание: Купить продукты     Статус: tod
 
 Этот проект находится под лицензией MIT. Используйте свободно!
 
-Сслыка на проект: https://github.com/Nuriddinkhuja/Task-Tracker-CLI
+[Сслыка на проект: https://github.com/Nuriddinkhuja/Task-Tracker-CLI](https://roadmap.sh/projects/task-tracker)
